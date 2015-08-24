@@ -1,0 +1,63 @@
+char x[50];
+int top=0;
+void push(char b)
+{
+    x[top]=b;
+    top++;
+    x[top]='\0';
+
+}
+void empty(char *x)
+{
+    x[0]='\0';
+    top=0;
+}
+
+int check(char a)
+{
+    int i=0;
+    while(x[i]!=a&& x[i]!='\0')
+    {
+        i++;
+    }
+    if(x[i]==a)
+        return 1;
+    else
+        return 0;
+}
+int main()
+{
+    int i=0,j=0,k=2,count=0;
+    char *s="abbba";
+    while(j<strlen(s))
+    {int c=0;
+    count =0;
+        for(i=j;i<strlen(s);i++)
+        {   //printf("  in for  ");
+            if(check(s[i]))
+                {
+                    printf("%c",s[i]);
+                    c++;
+                }
+            else
+            {
+                if(count>=k)
+                    break ;
+
+                else
+                {
+                    printf("%c",s[i]);
+                    push(s[i]);
+                    count++;
+                    c++;
+                }
+            }
+
+        }
+        printf(" length=%d\n",c);
+        empty(x);
+        j++;
+    }
+    return 0;
+}
+
