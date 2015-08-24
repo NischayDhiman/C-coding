@@ -1,0 +1,100 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include<stdio.h>
+#define M 1000000007
+#define lli long long int
+ 
+int min(int a, int b);
+ 
+lli power(int num, int pow)
+{
+    if(num == 0)
+    return 0;
+    if(pow == 0)
+        return 1;
+    lli temp = power(num, pow/2);
+    temp %= M;
+    temp *= temp;
+    temp %= M;
+    if(pow % 2)
+        temp *= num;
+    return temp%M;
+}
+// Returns value of Binomial Coefficient C(n, k)
+ 
+unsigned long long c(unsigned long long int n,unsigned long long int k)
+{
+     unsigned long long int C[n+1][k+1];
+     unsigned long long int i, j;
+     // Caculate value of Binomial Coefficient in bottom up manner
+     for (i = 0; i <= n; i++)
+     {
+          for (j = 0; j <=min(i,k); j++)
+          {
+               // Base Cases
+               if (j == 0 || j == i)
+                    C[i][j] = 1;
+               // Calculate value using previosly stored values
+               else
+                    C[i][j] =( (C[i-1][j-1])%M + (C[i-1][j])%M)%M;
+          }
+     }
+     return C[n][k];
+}
+ 
+int min(int a, int b )
+{
+     if(a>b)
+          return b;
+     else
+          return a;
+}
+int main()
+{
+     unsigned long long int n , r;
+     scanf("%llu", &n);
+     scanf("%llu", &r);
+     if(n<r)
+     {
+          unsigned long long int temp=n;
+          n=r;
+          r=temp;
+     }
+     if(n > r)
+     {
+          if(n < 25)
+          {
+               printf("0");
+               return 0 ;
+          }
+          if(r==24&&n==25)
+          {
+               printf("0");
+               return 0 ;
+          }
+          if(n>25&&(n==(r+2)))
+          {
+               unsigned long long int z=((n-26)%M);
+               lli temp = power(2, z);
+               temp *= 603457371;    //precalculated C(48,24)
+               temp %= M;
+               printf("%lld", temp);
+               return 0;
+          }
+          else if(n>25&&r!=n-2)
+          {
+               printf("0");
+               return 0;
+          }
+          else
+          printf("%llu",c(n+r-1,r));
+     }
+     if(n==r)
+     {
+          printf("0");
+          return 0;
+     }
+     return 0;
+}
