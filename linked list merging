@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct Node Node;
+struct Node
+{
+    int data;
+    Node *next;
+};
+Node* merge(Node *list1, Node *list2) {
+    if(list1==NULL)
+        return list2;
+    if(list2==NULL)
+        return list1;
+    if(list1->data<list2->data)
+    {
+        list1->next=merge(list1->next,list2);
+        return list1;
+    }
+    else
+    {
+        list2->next=merge(list2->next,list1);
+        return list2;
+    }
+    return NULL;
+}
+Node* NewNode(int x)
+{
+    Node *item = (Node*)malloc(sizeof(Node));
+    item->data = x;
+    item->next = NULL;
+    return item;
+}
+void freeAll(Node *ptr)
+{
+    while(ptr != NULL)
+    {
+        Node *item = ptr;
+        ptr = ptr->next;
+        free(item);
+    }
+}
+int main()
+{
+    int i, j, M, N, T, x;
+    scanf("%d", &T);
+    for(i = 0; i < T; i++)
+    {
+        Node *list1 = NULL, *list2 = NULL;
+        Node *ptr;
+        scanf("%d", &M);
+        for(j = 0; j < M; j++)
+        {
+            if(j == 0)
+            {
+                scanf("%d", &x);
+                list1 = NewNode(x);
+                ptr = list1;
+            }
+            else
+            {
+                scanf("%d", &x);
+                ptr->next = NewNode(x);
+                ptr = ptr->next;
+            }
+        }
+        scanf("%d", &N);
+        for(j = 0; j < N; j++)
+        {
+            if(j == 0)
+            {
+                scanf("%d", &x);
+                list2 = NewNode(x);
+                ptr = list2;
+            }
+            else
+            {
+                scanf("%d", &x);
+                ptr->next = NewNode(x);
+                ptr = ptr->next;
+            }
+
+        }
+        Node *result = merge(list1, list2);
+        ptr = result;
+        while(ptr != NULL)
+        {
+            printf("%d ", ptr->data);
+            ptr = ptr->next;
+        }
+        printf("\n");
+        freeAll(result);
+    }
+}
