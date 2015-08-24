@@ -1,0 +1,11 @@
+#include <stdio.h>
+int main()
+{
+    int x=1;
+    int y,z;
+    y=((x&240)>>4);
+    z=((x&15)<<4);
+//printf("%d",z);
+    printf("%d",(y|z));
+    return 0;
+}
