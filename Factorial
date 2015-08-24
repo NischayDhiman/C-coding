@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+unsigned long long result = 1;
+
+unsigned long long fact(unsigned long long n){
+    if(n!=1)
+     result = n*fact(n-1);
+    return result;
+}
+
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int value;
+    scanf("%d",&value);
+    printf("%llu",fact(value));
+    return 0;
+}
