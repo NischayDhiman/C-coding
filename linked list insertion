@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int info;
+    struct node *next;
+    struct node *prev;
+}*start=NULL,*last=NULL;
+
+void insertbeg(int a)
+{
+    struct node *newn=malloc(sizeof(struct node));
+    newn->info=a;
+    printf("in insert fxn");
+   // start->prev=newn;printf("in insert fxn");
+    newn->next=start;printf("in insert fxn");
+    start=newn;printf("in insert fxn");
+}
+void display()
+{
+    struct node *ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d",ptr->info);
+        ptr=ptr->next;
+    }
+}
+int main()
+{
+    int a[10],i=0;
+    printf("enter no. to be inserted");
+    for(i=0;i<5;i++)
+    {
+        scanf("%d",&a[i]);
+        insertbeg(a[i]);
+    }
+    display();
+    return 0;
+}
