@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+int count=0;
+int Un(int arr[3][3],int A, int B, int row,int col)
+{
+    if(A>row||B>col)
+        return ;
+
+    /*if(A==row&&B==col)
+    {
+        //count++;
+        return ;
+    }*/
+    if(arr[A][B]==1)
+    {
+        printf("A=%d  B=%d\n",A,B);
+        int c= Un(arr,A+1,B,row,col);
+        int d= Un(arr,A,B+1,row,col);
+
+        return ;
+    }
+    else
+
+        return ;
+}
+int main()
+{
+int arr[3][3]={1,1,0,
+               0,1,0,
+               1,1,1};
+count=Un(arr,0,0,2,2);
+printf("%d",count);
+}
