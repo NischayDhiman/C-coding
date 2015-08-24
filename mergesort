@@ -1,0 +1,133 @@
+#include <stdio.h>
+#include <stdlib.h>
+void merge(int * arr,int beg, int mid,int end);
+void mergesort(int * arr,int beg,int end)
+{
+    int mid;
+    if(beg>=end)
+    return;
+    mid=(beg+end)/2;
+    mergesort(arr,beg,mid);
+    mergesort(arr,mid+1,end);
+    merge(arr,beg,mid,end);
+}
+void merge(int * arr , int beg , int mid, int end)
+{
+    int k=end-beg+1;
+    int * res=malloc(sizeof(int)*k);
+    int i=beg,j=mid+1,l=0;
+    while(i<=mid&&j<=end)
+    {
+        if(arr[i]<arr[j])
+            res[l++]=arr[i++];
+        else
+            res[l++]=arr[j++];
+    }
+    while(i<=mid)
+        res[l++]=arr[i++];
+    while(j<=end)
+        res[l++]=arr[j++];
+
+    for(i=0;i<l;i++)
+        arr[beg+i]=res[i];
+}
+int firstMissingPositive(int A[],int n1) {
+int i =0;
+      for(i =0; i< n1; i++)
+      {
+        while(A[i] != i+1)
+        {
+          if(A[i] <= 0 )
+          {
+              printf("it doesnot satisfy if A[i] <= 0 condition as %d <= 0\n",A[i]);
+              break;
+          }
+          if(A[i] >n1)
+          {
+              printf("it doesnot satisfy if A[i] >n1 condition as %d >%d\n",A[i],n1);
+              break;
+          }
+          if(A[i] == A[A[i] -1])
+          {
+              printf("it doesnot satisfy if A[i] == A[A[i] -1] condition as %d == %d \n",A[i],A[A[i]-1]);
+              break;
+          }
+          /*if(A[i] <= 0 || A[i] >n1 || A[i] == A[A[i] -1])
+          {
+              printf("it doesnot satisfy if condition\n");
+              break;
+          }*/
+          int temp = A[i];
+          printf("temp=%d\n",temp);
+          A[i] = A[temp-1];
+          printf("swaping A[i]=> A[%d] &  A[temp-1]=>A[%d]\n",i,temp-1);
+          A[temp-1] = temp;
+        }
+      }
+      for( i =0; i< n1; i++)
+      {
+        if(A[i]!=i+1)
+        {
+            printf("condition A[i]!=i+1 satisfied as %d != %d\n",A[i],i+1);
+            printf("returning i+1 => %d\n",i+1);
+            return i+1;
+        }
+      }
+      printf("returning n1+1 => %d\n",n1+1);
+      return n1+1;
+    }
+int main()
+{
+    int i=0,max=0,A[6]={-1,1,3};
+    //mergesort(arr,0,4);
+/*
+    int i=4,j=0,l=i,initial=0;
+   // for(i=0;i<5;i++)
+        //printf("%d ",arr[i]);
+        while(j<6)
+        {
+            j++;
+
+           if(max<=arr[j]-arr[i])
+                {   printf("max\n");
+                    max=arr[j]-arr[i];
+                    l=j;
+                    printf("l=%d\n",l);
+                    initial=i;
+                }
+
+        }
+
+
+    printf("%d",l-initial);
+
+    */
+    /*int j=0;
+    for(j=0;j<3;j++)
+        printf("%d",arr[j]);
+
+    printf("\n");
+    int i=firstMissingPositive(arr,3);
+    printf("i= %d\n",i);
+    */
+    for(i=0;i<3;i++)
+        printf("%d",A[i]);
+                printf(" ");
+
+    int j =2;
+        for (i = 0; i < 3; i++)
+        {
+               for (; j > i; j--) {
+                    if (i != j && A[i] + A[j] == 0)
+                    {
+                        printf("found at %d %d ",i,j);
+                        return 0;
+                    } // solution found.
+                if (A[i] + A[j] < 0) break; // Clearly A[i] + A[j] would decrease as j decreases.
+                }
+        }
+
+
+    return 0;
+
+}
