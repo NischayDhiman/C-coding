@@ -1,0 +1,44 @@
+#include <stdio.h>
+int top=0;
+int arr[5];
+void push(int a)
+{
+    arr[top]=a;
+    top++;
+}
+void pop()
+{
+    top--;
+}
+void print(int *arr)
+{   int i=top-1;
+    while(i>=0)
+        {
+            printf("%d ",arr[i]);
+            i--;
+        }
+        printf("\n");
+
+
+}
+
+int main()
+{
+
+    push(1);
+    push(2);
+    push(3);
+    push(4);
+    print(arr);
+    pop();
+    print(arr);
+    pop();
+    print(arr);
+    pop();
+    print(arr);
+    pop();
+    push(23);
+    push(12);
+    push(2356);
+    print(arr);
+}
