@@ -1,0 +1,30 @@
+//to convert a number to binary number
+#include <stdio.h>
+int search1(const int* array, int n1)
+{
+    int i=0;
+    int beg=0;
+    int end= n1-1;
+    int mid;
+    while (beg <= end)
+      {
+      mid = (beg + end)/2;
+      if (array[mid]>array[end])
+          beg= mid;
+      else if (array[end]==array[mid])
+      {
+         //return mid;
+          break;
+      }
+      else
+         end = mid ;
+
+}
+return mid;
+}
+int main()
+{
+int a[100]={4,5,6,7,8,9,1,2,3};
+printf(" %d ",search1(a,11));
+    return 0;
+}
