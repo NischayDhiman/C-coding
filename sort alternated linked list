@@ -1,0 +1,110 @@
+#include <stdio.h>
+typedef struct Node Node;
+struct Node {
+    int data;
+    Node *link;
+};
+Node* newNode(int);
+void freeAll(Node *);
+void printList(Node *);
+Node* sort(Node *);
+
+void freeAll(Node *ptr) {
+    Node *t;
+    while(ptr != NULL) {
+        t = ptr;
+        ptr = ptr->link;
+        free(t);
+    }
+}
+
+Node* newNode(int d) {
+    Node *t = (Node*) malloc(sizeof(Node));
+    t->data = d;
+    t->link = NULL;
+    return t;
+}
+
+void printList(Node *ptr) {
+    while(ptr != NULL) {
+        printf("%d ", ptr->data);
+        ptr = ptr->link;
+    }
+    printf("\n");
+}
+
+
+void merge1(int * arr , int beg , int mid, int end)
+{
+    int k=end-beg+1;
+    int * res=malloc(sizeof(int)*k);
+    int i=beg,j=mid+1,l=0;
+    while(i<=mid&&j<=end)
+    {
+        if(arr[i]<arr[j])
+            res[l++]=arr[i++];
+        else
+            res[l++]=arr[j++];
+    }
+    while(i<=mid)
+        res[l++]=arr[i++];
+    while(j<=end)
+        res[l++]=arr[j++];
+
+    for(i=0;i<l;i++)
+        arr[beg+i]=res[i];
+}
+Node* sort1(Node *head,int n)
+{
+    int * arr=malloc(sizeof(int)*n);
+    int i=0;
+    Node * ptr1=head;
+    Node * ptr2=head->link;
+    while(ptr1!=NULL)
+    {
+        arr[i++]=ptr1->data;
+        ptr1=ptr1->link;
+        ptr1=ptr1->link;
+    }
+    int j=i;
+    ptr1=head->link;
+    i=0;
+    while(ptr1!=NULL)
+    {
+        arr[n-1-i]=ptr1->data;
+        i++;
+        ptr1=ptr1->link;
+        if(ptr1!=NULL)
+            ptr1=ptr1->link;
+    }
+    merge1(arr,0,j-1,n-1);
+    for(j=0;j<n;j++)
+    {
+        printf("%d",arr[j]);
+    }
+    return NULL;
+}
+
+int main() {
+    int T, i, j, N, x;
+    Node *ptr;
+    scanf("%d", &T);
+    for(i = 0; i < T; i++) {
+        Node *head = NULL;
+        scanf("%d", &N);
+        for(j = 0; j < N; j++) {
+            scanf("%d", &x);
+            if(j == 0) {
+                head = newNode(x);
+                ptr = head;
+            } else {
+                ptr->link = newNode(x);
+                ptr = ptr->link;
+            }
+        }
+        head = sort1(head,N);
+        printList(head);
+        freeAll(head);
+    }
+    return 0;
+}
