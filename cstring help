@@ -1,0 +1,38 @@
+
+#include <stdio.h>
+int main()
+{
+	int i,j,m=1,c=0,d=0,h=0,y=0,ct=0,len=4,k=2;
+    char sub[100]="0111";
+    while(m<=len)
+	{
+        for (i=0; sub[i+m-1] !='\0'&&i<len; i++)
+        {
+            c=0;d=0;
+            for (j=i; (sub[j] !='\0')&&j<(i+m); j++)
+            {
+                 if(sub[j]=='0')
+                 {
+                      c++;
+                      printf("c==%d",c);
+                 }
+                 else
+                 {
+                      d++;
+                      printf("d==%d",d);
+                 }
+           }
+           printf("\n");
+           if(c<=k&&d<=k)
+           {
+				ct++;
+           }
+           else
+                printf("exceeded value\n");
+      }
+      printf("count=%d\n",ct);
+      m++;
+    }
+    printf("final count=%d\n",ct);
+    return 0;
+}
