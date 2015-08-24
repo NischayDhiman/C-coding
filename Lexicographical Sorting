@@ -1,0 +1,23 @@
+
+#include <stdio.h>
+#include <string.h>
+#include <algorithm>
+using namespace std;
+
+int comp(string c, string d)
+{
+    string a=c;
+    string b=d;
+    a.append(d);
+    b.append(c);
+    return a.compare(b)>0?1:0;
+
+}
+int main()
+{
+
+    int arr[5]={1,2,3,4,5,99,9,90};
+    sort(arr.begin(),arr.end(),comp);
+    for(i=0;i<8;i++)
+        printf("%d ",arr[i]);
+}
