@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    int x=2876955;
+
+    char str[20];
+    sprintf(str,"%20d",x);
+    puts(str);
+    //return(str[19 - x]);
+    printf("%c",str[19]);
+}
