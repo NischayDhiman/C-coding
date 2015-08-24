@@ -1,0 +1,83 @@
+
+
+void reverse1(char arr[],int len)
+{
+    int temp,i=0;
+    while(i<len)
+    {
+        if(arr[i]=='1')
+            arr[i]='0';
+        else
+            arr[i]='1';
+        i++;
+    }
+   // puts(arr);
+    //return arr;
+}
+
+void merge1(char arr[],int len)
+{
+    char str1[len];
+    int i=0;
+    while(i<len)
+    {
+        str1[i]=arr[i];
+        i++;
+    }
+    //printf("str1==  %s\n",str1);
+    strrev(str1);
+    //printf("strrev  str1==  %s\n",str1);
+    reverse1(str1,len);
+    //printf("reversing  str1==  %s\n",str1);
+    arr[len]='0';
+    i=0;
+    while(i<len)
+    {
+
+        arr[len+i+1]=str1[i];
+        i++;
+    }
+    //printf("arr  %s\n",arr);
+    //puts(str);
+
+}
+int main()
+{
+   
+    int t=0,j=0;
+    cin>>t;
+    for(j=0;j<t;j++)
+    {
+        int k=0,count=0;
+        cin>>b;
+
+        if(k==0||k==1)
+        {
+           printf("Case #%d 0",j); 
+		
+            continue;
+
+        }
+        int u=0;
+        u=k;
+        while(k)
+        {
+            k/=2;
+            count++;
+        }
+        //printf("count== %d\n",count);
+        char str[10000]="0";
+        int i=0;
+        for(i=0;i<count;i++)
+        {
+            merge1(str,strlen(str));
+           // puts(str);
+
+        }
+       // puts(str);
+        printf("Case #%d %c",j,str[u-1]); 
+		
+    }
+    
+    return 0;
+}
